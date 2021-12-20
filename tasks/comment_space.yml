@@ -1,0 +1,26 @@
+---
+
+- name: "[MISSING COMMENT SPACES] check for missing comment spaces"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^ *#+[a-zA-Z|\[|:]+.*$'
+    recurse: true
+    patterns: "{{ files_pattern }}"
+  register: _result
+
+- name: "[MISSING COMMENT SPACES] add missing comment spaces"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^ *(#+)([a-zA-Z|\[|:]+.*)$'
+    replace: '\1 \2'
+  loop: "{{ _result.files }}"
+
+- name: "[MISSING COMMENT SPACES] check for missing comment spaces"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^ *#+[a-zA-Z|\[|:]+.*$'
+    recurse: true
+    patterns: "{{ files_pattern }}"
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true

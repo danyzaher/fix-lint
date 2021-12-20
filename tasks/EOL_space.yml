@@ -1,0 +1,29 @@
+---
+# Fix trailing spaces
+
+- name: "[TRAILING SPACES] check for trailing spaces"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^.* +$'
+    recurse: true
+    patterns: "{{ files_pattern }}"
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true
+  
+- name: "[TRAILING SPACES] erase trailing spaces"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*) +$'
+    replace: '\1'
+  loop: "{{ _result.files }}"
+
+- name: "[TRAILING SPACES] check for trailing spaces"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^.* +$'
+    recurse: true
+    patterns: "{{ files_pattern }}"
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true

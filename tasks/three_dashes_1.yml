@@ -1,0 +1,14 @@
+---
+
+- include_tasks:
+    file: three_dashes_2.yml
+  vars:
+    _current_file: "{{ item.path }}"
+  loop: "{{ _fix_files.files }}"
+
+
+- include_tasks:
+    file: three_dashes_2.yml
+  vars:
+    _current_file: "{{ item.path }}"
+  loop: "{{ _fix_files.files }}"

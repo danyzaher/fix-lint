@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include fix-lint"
+      include_role:
+        name: "fix-lint"

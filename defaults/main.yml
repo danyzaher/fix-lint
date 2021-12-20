@@ -1,0 +1,14 @@
+---
+# defaults file for fix-lint
+
+# directory path to files that must be correct
+fix_directories: 
+  - /home/zaher/Documents/cis-apache-backup/
+  
+ansible_lint_rules: 
+  - set -e
+  - yamllint .
+  - ansible-lint -x 106
+  - flake8 --ignore E501
+
+files_pattern: '*.yml'

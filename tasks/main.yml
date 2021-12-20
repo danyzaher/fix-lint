@@ -1,0 +1,73 @@
+---
+
+- name: GET FILES THAT MUST BE FIXED
+  find:
+    paths: "{{ fix_directories }}"
+    patterns: "{{ files_pattern }}"
+    recurse: true
+  register: _fix_files 
+
+- name: Correct end of file space
+  include_tasks: 
+    file: EOF_space_1.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Correct trailling spaces
+  include_tasks: 
+    file: EOL_space.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Correct trailling spaces
+  include_tasks: 
+    file: EOL_space.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Correct trailling spaces
+  include_tasks: 
+    file: EOL_space.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Correct trailling spaces
+  include_tasks: 
+    file: EOL_space.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Correct trailling spaces
+  include_tasks: 
+    file: EOL_space.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Correct trailling spaces
+  include_tasks: 
+    file: EOL_space.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Correct missing ---
+  include_tasks: 
+    file: three_dashes_1.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Correct missing comment spaces
+  include_tasks: 
+    file: comment_space.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Correct missing comment spaces
+  include_tasks: 
+    file: comment_space.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Correct missing comment spaces
+  include_tasks: 
+    file: comment_space.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Replace yes/no for true/false
+  include_tasks: 
+    file: yes_to_true.yml
+#  when: "'' in ansible_lint_rules"
+
+- name: Replace yes/no for true/false
+  include_tasks: 
+    file: yes_to_true.yml
+#  when: "'' in ansible_lint_rules"

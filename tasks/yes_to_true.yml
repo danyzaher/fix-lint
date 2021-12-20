@@ -1,0 +1,35 @@
+---
+
+- name: "[YES_TO_TRUE] Search for yes or no"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^ *[a-zA-Z|_|:]+ (True|False|yes|Yes|no|No) *$'
+    recurse: true
+    patterns: "{{ files_pattern }}"
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true
+
+- name: "[YES_TO_TRUE] replace yes to true"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^( *[a-zA-Z|_|:]+ )(yes|Yes|True)( *)$'
+    replace: '\1true\3'
+  loop: "{{ _result.files }}"
+
+- name: "[NO_TO_FALSE] replace no by false"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^( *[a-zA-Z|_|:]+ )(no|No|False)( *)$'
+    replace: '\1false\3'
+  loop: "{{ _result.files }}"
+
+- name: "[YES_TO_TRUE] Search for yes or no"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^ *[a-zA-Z|_|:]+ (True|False|yes|Yes|no|No) *$'
+    recurse: true
+    patterns: "{{ files_pattern }}"
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true
