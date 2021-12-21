@@ -1,7 +1,7 @@
 FIX_LINT
 =========
 
-## Permet de corriger les erreurs de syntaxe uniquement, sans altérer la sémantique du code.
+## Permet de corriger les erreurs de syntaxe uniquement, sans altérer (normalement) la sémantique du code. Ecris pour des projets ansible, pourrait être adapté pour d'autres langages
 
 A noter que le rôle devrait être exécuter plusieurs fois pour être certains que toutes les erreurs de syntaxe sont corrigées.
 

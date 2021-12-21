@@ -5,9 +5,3 @@
   vars:
     _current_file: "{{ item.path }}"
   loop: "{{ _fix_files.files }}"
-
-- include_tasks:
-    file: blank_lines_2.yml
-  vars:
-    _current_file: "{{ item.path }}"
-  loop: "{{ _fix_files.files }}"

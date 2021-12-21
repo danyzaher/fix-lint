@@ -8,7 +8,7 @@
     use_regex: "{{ use_regex }}"
   register: _fix_files 
 
-# - name: Correct end of file space
+# - name: Correct end of file newline
 #   include_tasks: 
 #     file: EOF_space_1.yml
 

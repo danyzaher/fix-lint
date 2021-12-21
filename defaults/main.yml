@@ -1,15 +1,14 @@
 ---
-# defaults file for fix-lint
-
 # directory path to files that must be correct
 fix_directories: 
   - /home/zaher/Documents/cis-apache-backup/
 #  - /home/zaher/Bureau/cis-tomcat/
-  
-ansible_lint_rules: []
 
+# Files pattern to be correct 
 files_pattern: '*.yml'
 
+# Use regex in files_pattern or not
 use_regex: false
 
+# length max for each lines
 line_max_length: 160

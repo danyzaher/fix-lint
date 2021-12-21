@@ -20,18 +20,6 @@
     regexp: '^([.|\n]*)[\n, ]{2,}([.|\n]*)$'
     replace: '\1\n\2'
 
-- name: "[BLANK LINES] erase blocks of empty lines"
-  replace:
-    path: "{{ _current_file }}"
-    regexp: '^([.|\n]*)[\n, ]{3,}([.|\n]*)$'
-    replace: '\1\n\2'
-
-- name: "[BLANK LINES] erase blocks of empty lines"
-  replace:
-    path: "{{ _current_file }}"
-    regexp: '^([.|\n]*)[\n, ]{3,}([.|\n]*)$'
-    replace: '\1\n\2'
-
 - name: "[BLANK LINES] get end of file"
   shell: "tail -1 {{ _current_file }}"
   register: _result

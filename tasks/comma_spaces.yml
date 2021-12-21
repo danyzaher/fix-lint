@@ -1,15 +1,27 @@
 ---
 
+
+- name: "[COMMA SPACES] search for files with commas"
+  find: 
+    paths: "{{ fix_directories }}"
+    contains: '^((?!(replace|line|regexp|contains)).)* *, *.*$'
+    patterns: "{{ files_pattern }}"
+    recurse: true
+    use_regex: "{{ use_regex }}"
+  register: result
+
 - name: "[COMMA SPACES] add space after comma and erase spaces before"
   replace:
     path: "{{ item.path }}"
     regexp: '^(.*) *, *(.*)$'
     replace: '\1, \2'
-  loop: "{{ _fix_files.files }}"
+  loop: "{{ _result.files }}"
+  when: _result.files is defined
 
 - name: "[COMMA SPACES] add space after comma and erase spaces before"
   replace:
     path: "{{ item.path }}"
     regexp: '^(.*) , *(.*)$'
     replace: '\1, \2'
-  loop: "{{ _fix_files.files }}"
+  loop: "{{ _result.files }}"
+  when: _result.files is defined
