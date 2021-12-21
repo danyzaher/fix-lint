@@ -6,6 +6,7 @@
     contains: '^(.*\{\{[a-z|A-Z|\-|_|\.]+.*)|(.*[a-z|A-Z|\-|_|\.]+\}\}.*)$'
     patterns: "{{ files_pattern }}"
     recurse: true
+    use_regex: "{{ use_regex }}"
   register: _result
   failed_when: _result.matched > 0
   ignore_errors: true
@@ -32,6 +33,7 @@
     contains: '^(.*\{\{[a-z|A-Z|\-|_|\.]+.*)|(.*[a-z|A-Z|\-|_|\.]+\}\}.*)$'
     patterns: "{{ files_pattern }}"
     recurse: true
+    use_regex: "{{ use_regex }}"
   register: _result
   failed_when: _result.matched > 0
   ignore_errors: true
@@ -43,6 +45,7 @@
     contains: '^(.*\{\{ {2,}[a-z|A-Z|\-|_|\.]+.*)|(.*[a-z|A-Z|\-|_|\.]+ {2,}\}\}.*)$'
     patterns: "{{ files_pattern }}"
     recurse: true
+    use_regex: "{{ use_regex }}"
   register: _result
   failed_when: _result.matched > 0
   ignore_errors: true
@@ -69,6 +72,7 @@
     contains: '^(.*\{\{ {2,}[a-z|A-Z|\-|_|\.]+.*)|(.*[a-z|A-Z|\-|_|\.]+ {2,}\}\}.*)$'
     patterns: "{{ files_pattern }}"
     recurse: true
+    use_regex: "{{ use_regex }}"
   register: _result
   failed_when: _result.matched > 0
   ignore_errors: true

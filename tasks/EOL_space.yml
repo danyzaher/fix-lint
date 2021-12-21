@@ -7,6 +7,7 @@
     contains: '^.* +$'
     recurse: true
     patterns: "{{ files_pattern }}"
+    use_regex: "{{ use_regex }}"
   register: _result
   failed_when: _result.matched > 0
   ignore_errors: true
@@ -24,6 +25,7 @@
     contains: '^.* +$'
     recurse: true
     patterns: "{{ files_pattern }}"
+    use_regex: "{{ use_regex }}"
   register: _result
   failed_when: _result.matched > 0
   ignore_errors: true

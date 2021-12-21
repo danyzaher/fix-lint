@@ -13,3 +13,5 @@ ansible_lint_rules:
   - flake8 --ignore E501
 
 files_pattern: '*.yml'
+
+use_regex: false

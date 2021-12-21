@@ -26,6 +26,7 @@
     paths: "{{ fix_directories }}"
     contains: '^.*\xA0.*$'
     recurse: true
+    use_regex: "{{ use_regex }}"
     patterns: "{{ files_pattern }}"
   register: _result
   ignore_errors: true
@@ -60,6 +61,7 @@
     paths: "{{ fix_directories }}"
     contains: '^.*\xA0.*$'
     recurse: true
+    use_regex: "{{ use_regex }}"
     patterns: "{{ files_pattern }}"
   register: _result
   ignore_errors: true

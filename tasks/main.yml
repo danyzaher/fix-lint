@@ -5,11 +5,12 @@
     paths: "{{ fix_directories }}"
     patterns: "{{ files_pattern }}"
     recurse: true
+    use_regex: "{{ use_regex }}"
   register: _fix_files 
 
-- name: Correct end of file space
-  include_tasks: 
-    file: EOF_space_1.yml
+# - name: Correct end of file space
+#   include_tasks: 
+#     file: EOF_space_1.yml
 
 - name: Correct trailling spaces
   include_tasks: 
@@ -42,7 +43,7 @@
 - name: Correct spaces before and after commas
   include_tasks:
     file: comma_spaces.yml
-    
+
 - name: Correct spaces after hyphen
   include_tasks:
     file: hyphen_spaces.yml
