@@ -1,0 +1,8 @@
+---
+
+- name: "[HYPHEN SPACES] add space after comma and erase spaces before"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*)- {2,}(.*)$'
+    replace: '\1- \2'
+  loop: "{{ _fix_files.files }}"

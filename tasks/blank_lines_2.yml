@@ -1,0 +1,42 @@
+---
+
+- name: "[BLANK LINES] get end of file"
+  shell:
+    cmd: "tail -1 {{ _current_file }}"
+  register: _result
+  changed_when: false
+  failed_when: _result.stdout | length < 4
+  ignore_errors: true
+
+- name: "[BLANK LINES] erase last line of file"
+  lineinfile:
+    path: "{{ _current_file }}"
+    regexp: '^ *$'
+    state: absent
+  when: _result.failed
+
+- name: "[BLANK LINES] erase blocks of empty lines"
+  replace:
+    path: "{{ _current_file }}"
+    regexp: '^([.|\n]*)[\n, ]{2,}([.|\n]*)$'
+    replace: '\1\n\2'
+
+- name: "[BLANK LINES] erase blocks of empty lines"
+  replace:
+    path: "{{ _current_file }}"
+    regexp: '^([.|\n]*)[\n, ]{3,}([.|\n]*)$'
+    replace: '\1\n\2'
+
+- name: "[BLANK LINES] erase blocks of empty lines"
+  replace:
+    path: "{{ _current_file }}"
+    regexp: '^([.|\n]*)[\n, ]{3,}([.|\n]*)$'
+    replace: '\1\n\2'
+
+- name: "[BLANK LINES] get end of file"
+  shell:
+    cmd: "tail -1 {{ _current_file }}"
+  register: _result
+  changed_when: false
+  failed_when:  _result.stdout | length < 4
+  ignore_errors: true

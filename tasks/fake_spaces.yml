@@ -1,0 +1,66 @@
+---
+
+# - name: "[FAKE SPACES] check presence of fake spaces"
+#   shell:  "cat -A {{ _current_file }} | grep 'M-BM-'"
+#   register: _result
+#   changed_when: false
+#   ignore_errors: true
+#   failed_when: _result.stdout | length > 1
+
+# - name: "[FAKE SPACES] replace fake"
+#   replace:
+#     path: "{{ _current_file }}"
+#     regexp: '^(.*\{\{)[\xA0|\0xa0| ]*([a-z|A-Z|\.|\-|_]+)[\xA0|\0xa0| ]*(\}\}.*)$'
+#     replace: '\1 \2 \3'
+#   when: _result.failed
+
+# - name: "[FAKE SPACES] check presence of fake spaces"
+#   shell:  "cat -A {{ _current_file }} | grep 'M-BM-'"
+#   register: _result
+#   changed_when: false
+#   ignore_errors: true
+#   failed_when: _result.stdout | length > 1
+
+- name: "[FAKE SPACES] check presence of fake spaces"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^.*\xA0.*$'
+    recurse: true
+    patterns: "{{ files_pattern }}"
+  register: _result
+  ignore_errors: true
+  failed_when: _result.matched > 0
+
+- name: "[FAKE SPACES] replace fake"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*)\xA0(.*$)$'
+    replace: '\1 \2'
+  loop: "{{ _result.files }}"
+  when: _result.failed
+
+- name: "[FAKE SPACES] replace fake"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*)\xA0(.*$)$'
+    replace: '\1 \2'
+  loop: "{{ _result.files }}"
+  when: _result.failed
+
+- name: "[FAKE SPACES] replace fake"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*)\xA0(.*$)$'
+    replace: '\1 \2'
+  loop: "{{ _result.files }}"
+  when: _result.failed
+
+- name: "[FAKE SPACES] check presence of fake spaces"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^.*\xA0.*$'
+    recurse: true
+    patterns: "{{ files_pattern }}"
+  register: _result
+  ignore_errors: true
+  failed_when: _result.matched > 0

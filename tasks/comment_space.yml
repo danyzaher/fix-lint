@@ -1,5 +1,5 @@
 ---
-
+# Add space between comments mark and sentences if absent
 - name: "[MISSING COMMENT SPACES] check for missing comment spaces"
   find:
     paths: "{{ fix_directories }}"

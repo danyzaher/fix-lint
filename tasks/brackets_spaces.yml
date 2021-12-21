@@ -1,0 +1,74 @@
+---
+
+- name: "[BRACKETS SPACES] check for missing spaces between brackets"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^(.*\{\{[a-z|A-Z|\-|_|\.]+.*)|(.*[a-z|A-Z|\-|_|\.]+\}\}.*)$'
+    patterns: "{{ files_pattern }}"
+    recurse: true
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true
+
+- name: "[BRACKETS SPACES] add spaces between brackets"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*\{\{)([a-z|A-Z|\-|_|\.]+.*)$'
+    replace: '\1 \2'
+  loop: "{{ _result.files }}"
+  when: _result.failed
+
+- name: "[BRACKETS SPACES] add spaces between brackets"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*[a-z|A-Z|\-|_|\.]+)(\}\}.*)$'
+    replace: '\1 \2'
+  loop: "{{ _result.files }}"
+  when: _result.failed
+
+- name: "[BRACKETS SPACES] check for missing spaces between brackets"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^(.*\{\{[a-z|A-Z|\-|_|\.]+.*)|(.*[a-z|A-Z|\-|_|\.]+\}\}.*)$'
+    patterns: "{{ files_pattern }}"
+    recurse: true
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true
+
+
+- name: "[BRACKETS SPACES] check for missing spaces between brackets"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^(.*\{\{ {2,}[a-z|A-Z|\-|_|\.]+.*)|(.*[a-z|A-Z|\-|_|\.]+ {2,}\}\}.*)$'
+    patterns: "{{ files_pattern }}"
+    recurse: true
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true
+
+- name: "[BRACKETS SPACES] add spaces between brackets"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*\{\{) {2,}([a-z|A-Z|\-|_|\.]+.*)$'
+    replace: '\1 \2'
+  loop: "{{ _result.files }}"
+  when: _result.failed
+
+- name: "[BRACKETS SPACES] add spaces between brackets"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*[a-z|A-Z|\-|_|\.]+) {2,}(\}\}.*)$'
+    replace: '\1 \2'
+  loop: "{{ _result.files }}"
+  when: _result.failed
+
+- name: "[BRACKETS SPACES] check for missing spaces between brackets"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^(.*\{\{ {2,}[a-z|A-Z|\-|_|\.]+.*)|(.*[a-z|A-Z|\-|_|\.]+ {2,}\}\}.*)$'
+    patterns: "{{ files_pattern }}"
+    recurse: true
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true

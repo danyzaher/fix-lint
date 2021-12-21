@@ -10,64 +10,47 @@
 - name: Correct end of file space
   include_tasks: 
     file: EOF_space_1.yml
-#  when: "'' in ansible_lint_rules"
 
 - name: Correct trailling spaces
   include_tasks: 
     file: EOL_space.yml
-#  when: "'' in ansible_lint_rules"
 
 - name: Correct trailling spaces
   include_tasks: 
     file: EOL_space.yml
-#  when: "'' in ansible_lint_rules"
-
-- name: Correct trailling spaces
-  include_tasks: 
-    file: EOL_space.yml
-#  when: "'' in ansible_lint_rules"
-
-- name: Correct trailling spaces
-  include_tasks: 
-    file: EOL_space.yml
-#  when: "'' in ansible_lint_rules"
-
-- name: Correct trailling spaces
-  include_tasks: 
-    file: EOL_space.yml
-#  when: "'' in ansible_lint_rules"
-
-- name: Correct trailling spaces
-  include_tasks: 
-    file: EOL_space.yml
-#  when: "'' in ansible_lint_rules"
 
 - name: Correct missing ---
   include_tasks: 
     file: three_dashes_1.yml
-#  when: "'' in ansible_lint_rules"
 
 - name: Correct missing comment spaces
   include_tasks: 
     file: comment_space.yml
-#  when: "'' in ansible_lint_rules"
 
 - name: Correct missing comment spaces
   include_tasks: 
     file: comment_space.yml
-#  when: "'' in ansible_lint_rules"
-
-- name: Correct missing comment spaces
-  include_tasks: 
-    file: comment_space.yml
-#  when: "'' in ansible_lint_rules"
 
 - name: Replace yes/no for true/false
   include_tasks: 
     file: yes_to_true.yml
-#  when: "'' in ansible_lint_rules"
 
-- name: Replace yes/no for true/false
-  include_tasks: 
-    file: yes_to_true.yml
-#  when: "'' in ansible_lint_rules"
+- name: Erase blank spaces
+  include_tasks:
+    file: blank_lines_1.yml
+
+- name: Correct spaces before and after commas
+  include_tasks:
+    file: comma_spaces.yml
+    
+- name: Correct spaces after hyphen
+  include_tasks:
+    file: hyphen_spaces.yml
+
+- name: Correct spaces between brackets
+  include_tasks:
+    file: brackets_spaces.yml
+
+- name: Correct fake spaces
+  include_tasks:
+    file: fake_spaces.yml

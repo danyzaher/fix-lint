@@ -1,0 +1,15 @@
+---
+
+- name: "[COMMA SPACES] add space after comma and erase spaces before"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*) *, *(.*)$'
+    replace: '\1, \2'
+  loop: "{{ _fix_files.files }}"
+
+- name: "[COMMA SPACES] add space after comma and erase spaces before"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*) , *(.*)$'
+    replace: '\1, \2'
+  loop: "{{ _fix_files.files }}"
