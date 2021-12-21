@@ -16,17 +16,9 @@
   include_tasks: 
     file: EOL_space.yml
 
-- name: Correct trailling spaces
-  include_tasks: 
-    file: EOL_space.yml
-
 - name: Correct missing ---
   include_tasks: 
     file: three_dashes_1.yml
-
-- name: Correct missing comment spaces
-  include_tasks: 
-    file: comment_space.yml
 
 - name: Correct missing comment spaces
   include_tasks: 

@@ -19,6 +19,20 @@
     replace: '\1'
   loop: "{{ _result.files }}"
 
+- name: "[TRAILING SPACES] erase trailing spaces"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*) +$'
+    replace: '\1'
+  loop: "{{ _result.files }}"
+  
+- name: "[TRAILING SPACES] erase trailing spaces"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*) +$'
+    replace: '\1'
+  loop: "{{ _result.files }}"
+
 - name: "[TRAILING SPACES] check for trailing spaces"
   find:
     paths: "{{ fix_directories }}"

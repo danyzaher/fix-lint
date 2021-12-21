@@ -16,6 +16,20 @@
     insertafter: EOF
   when: _result.stdout | length > 1
 
+- name: "[MISSING NEWLINE] add newline"
+  lineinfile:
+    path: "{{ _current_file }}"
+    line: ' '
+    insertafter: EOF
+  when: _result.stdout | length > 1
+  
+- name: "[MISSING NEWLINE] add newline"
+  lineinfile:
+    path: "{{ _current_file }}"
+    line: ' '
+    insertafter: EOF
+  when: _result.stdout | length > 1
+
 - name: "[MISSING NEWLINE] check the last line of file"
   shell: 
     cmd: tail -1 {{ _current_file }}

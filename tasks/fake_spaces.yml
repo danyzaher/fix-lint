@@ -1,5 +1,4 @@
 ---
----
 
 - name: "[FAKE SPACES] check presence of fake spaces"
   find:
