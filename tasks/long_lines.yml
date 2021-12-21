@@ -1,0 +1,30 @@
+---
+
+- name: "[LONG LINES] check for lines longer than {{ line_max_length }}"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^.{{{ line_max_length }},}$'
+    recurse: true
+    use_regex: "{{ use_regex }}"
+    patterns: "{{ files_pattern }}"
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true
+
+- name: "[LONG LINES] divide long lines"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.{{{ line_max_length | int - 1 }}})(.*)$'
+    replace: '\1\\\n\2'
+  loop: "{{ _result.files }}"
+
+- name: "[LONG LINES] check for lines longer than {{ line_max_length }}"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^.{{{ line_max_length }},}$'
+    recurse: true
+    use_regex: "{{ use_regex }}"
+    patterns: "{{ files_pattern }}"
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true

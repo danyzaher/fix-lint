@@ -1,10 +1,8 @@
 ---
-# tasks file for fix-lint
 # Fix missing ---
 
 - name: "[MISSING DASHES] check first line of every files"
-  shell:
-    cmd: head -1 {{ _current_file }}
+  shell: head -1 {{ _current_file }}
   register: _result
   changed_when: false
   failed_when: "'---' not in _result.stdout"
@@ -18,8 +16,7 @@
   when: "'---' not in _result.stdout"
 
 - name: "[MISSING DASHES] check first line of every files"
-  shell:
-    cmd: head -1 {{ _current_file }}
+  shell: head -1 {{ _current_file }}
   register: _result
   changed_when: false
   failed_when: "'---' not in _result.stdout"

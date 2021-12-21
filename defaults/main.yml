@@ -6,12 +6,10 @@ fix_directories:
   - /home/zaher/Documents/cis-apache-backup/
 #  - /home/zaher/Bureau/cis-tomcat/
   
-ansible_lint_rules: 
-  - set -e
-  - yamllint .
-  - ansible-lint -x 106
-  - flake8 --ignore E501
+ansible_lint_rules: []
 
 files_pattern: '*.yml'
 
 use_regex: false
+
+line_max_length: 160

@@ -1,8 +1,7 @@
 ---
 
 - name: "[BLANK LINES] get end of file"
-  shell:
-    cmd: "tail -1 {{ _current_file }}"
+  shell: "tail -1 {{ _current_file }}"
   register: _result
   changed_when: false
   failed_when: _result.stdout | length < 4
@@ -34,8 +33,7 @@
     replace: '\1\n\2'
 
 - name: "[BLANK LINES] get end of file"
-  shell:
-    cmd: "tail -1 {{ _current_file }}"
+  shell: "tail -1 {{ _current_file }}"
   register: _result
   changed_when: false
   failed_when:  _result.stdout | length < 4

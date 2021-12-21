@@ -3,7 +3,7 @@
 - name: "[BRACKETS SPACES] check for missing spaces between brackets"
   find:
     paths: "{{ fix_directories }}"
-    contains: '^(.*\{\{[a-z|A-Z|\-|_|\.]+.*)|(.*[a-z|A-Z|\-|_|\.]+\}\}.*)$'
+    contains: '^(.*\{\{[a-z|A-Z|\-|_|\.|\(]+.*)|(.*[a-z|A-Z|\-|_|\.|\)]+\}\}.*)$'
     patterns: "{{ files_pattern }}"
     recurse: true
     use_regex: "{{ use_regex }}"
@@ -14,7 +14,7 @@
 - name: "[BRACKETS SPACES] add spaces between brackets"
   replace:
     path: "{{ item.path }}"
-    regexp: '^(.*\{\{)([a-z|A-Z|\-|_|\.]+.*)$'
+    regexp: '^(.*\{\{)([a-z|A-Z|\-|_|\.|\(|\)]+.*)$'
     replace: '\1 \2'
   loop: "{{ _result.files }}"
   when: _result.failed
@@ -22,7 +22,7 @@
 - name: "[BRACKETS SPACES] add spaces between brackets"
   replace:
     path: "{{ item.path }}"
-    regexp: '^(.*[a-z|A-Z|\-|_|\.]+)(\}\}.*)$'
+    regexp: '^(.*[a-z|A-Z|\-|_|\.|\(||\)]+)(\}\}.*)$'
     replace: '\1 \2'
   loop: "{{ _result.files }}"
   when: _result.failed
@@ -42,7 +42,7 @@
 - name: "[BRACKETS SPACES] check for missing spaces between brackets"
   find:
     paths: "{{ fix_directories }}"
-    contains: '^(.*\{\{ {2,}[a-z|A-Z|\-|_|\.]+.*)|(.*[a-z|A-Z|\-|_|\.]+ {2,}\}\}.*)$'
+    contains: '^(.*\{\{[a-z|A-Z|\-|_|\.|\(]+.*)|(.*[a-z|A-Z|\-|_|\.|\)]+\}\}.*)$'
     patterns: "{{ files_pattern }}"
     recurse: true
     use_regex: "{{ use_regex }}"
