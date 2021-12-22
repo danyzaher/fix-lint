@@ -1,0 +1,29 @@
+---
+
+- name: "[SHELL TO COMMAND] Check for shell modules"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^.*shell:(\ncmd:)?((?!\|).)+$'
+    recurse: true
+    use_regex: "{{ use_regex }}"
+    patterns: "{{ files_pattern }}"
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true
+
+- name: "[SHELL TO COMMAND] Replace shell to command"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*)shell(:(\ncmd:)?((?!\|).)+)$'
+    replace: '\1command\2'
+  loop: "{{ _result.files }}"
+- name: "[SHELL TO COMMAND] Check for shell modules"
+  find:
+    paths: "{{ fix_directories }}"
+    contains: '^.*shell:(\ncmd:)?((?!\|).)+$'
+    recurse: true
+    use_regex: "{{ use_regex }}"
+    patterns: "{{ files_pattern }}"
+  register: _result
+  failed_when: _result.matched > 0
+  ignore_errors: true

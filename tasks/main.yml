@@ -60,3 +60,7 @@
 # - name: "[LONG LINES] Divide long lines"
 #   include_tasks:
 #     file: long_lines.yml
+
+- name: "[SHELL TO COMMAND] Use shell only when necessary"
+  include_tasks:
+    file: shell_to_command.yml
