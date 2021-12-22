@@ -1,32 +1,32 @@
 ---
 # Add space between comments mark and sentences if absent
-- name: "[MISSING COMMENT SPACES] check for missing comment spaces"
+- name: "[COMMENT SPACES] check for missing comment spaces"
   find:
     paths: "{{ fix_directories }}"
-    contains: '^#{1,3}((?! ).)+.*$'
+    contains: '^#{1,3}((?!( |#)).)+.*$'
     recurse: true
     patterns: "{{ files_pattern }}"
     use_regex: "{{ use_regex }}"
   register: _result
 
-- name: "[MISSING COMMENT SPACES] add missing comment spaces"
+- name: "[COMMENT SPACES] add missing comment spaces"
   replace:
     path: "{{ item.path }}"
-    regexp: '^(#{1,3})(((?! ).)+.*)$'
+    regexp: '^(#{1,3})(((?!( |#)).)+.*)$'
     replace: '\1 \2'
   loop: "{{ _result.files }}"
 
-- name: "[MISSING COMMENT SPACES] add missing comment spaces"
+- name: "[COMMENT SPACES] add missing comment spaces"
   replace:
     path: "{{ item.path }}"
-    regexp: '^(#{1,3})(((?! ).)+.*)$'
+    regexp: '^(#{1,3})(((?!( |#)).)+.*)$'
     replace: '\1 \2'
   loop: "{{ _result.files }}"
-  
-- name: "[MISSING COMMENT SPACES] check for missing comment spaces"
+
+- name: "[COMMENT SPACES] check for missing comment spaces"
   find:
     paths: "{{ fix_directories }}"
-    contains: '^#{1,3}((?! ).)+.*$'
+    contains: '^#{1,3}((?!( |#)).)+.*$'
     recurse: true
     patterns: "{{ files_pattern }}"
     use_regex: "{{ use_regex }}"

@@ -1,6 +1,6 @@
 ---
 
-- name: GET FILES THAT MUST BE FIXED
+- name: "[PRE-TASK] GET FILES THAT MUST BE FIXED"
   find:
     paths: "{{ fix_directories }}"
     patterns: "{{ files_pattern }}"
@@ -8,46 +8,55 @@
     use_regex: "{{ use_regex }}"
   register: _fix_files 
 
-# - name: Correct end of file newline
-#   include_tasks: 
-#     file: EOF_space_1.yml
+#  - name: [MISSING NEWLINE] Correct end of file newline
+#    include_tasks: 
+#     file: EOF_space.yml
+#    vars:
+#      _current_file: "{{ item.path }}"
+#    loop: "{{ _fix_files.files }}"
 
-- name: Correct trailling spaces
+- name: "[TRAILING SPACES] Correct trailing spaces"
   include_tasks: 
     file: EOL_space.yml
 
-- name: Correct missing ---
+- name: "[MISSING DASHES] Correct missing ---"
   include_tasks: 
-    file: three_dashes_1.yml
+    file: three_dashes.yml
+  vars:
+    _current_file: "{{ item.path }}"
+  loop: "{{ _fix_files.files }}"
 
-- name: Correct missing comment spaces
+- name: "[COMMENT SPACES] Correct missing comment spaces"
   include_tasks: 
     file: comment_space.yml
 
-- name: Replace yes/no for true/false
+- name: "[YES TO TRUE] Replace yes/no for true/false"
   include_tasks: 
     file: yes_to_true.yml
 
-- name: Erase blank spaces
+- name: "[BLANK LINES] Erase blank spaces"
   include_tasks:
-    file: blank_lines_1.yml
+    file: blank_lines.yml
+  vars:
+    _current_file: "{{ item.path }}"
+  loop: "{{ _fix_files.files }}"
 
-- name: Correct spaces before and after commas
+- name: "[COMMA SPACES] Correct spaces before and after commas"
   include_tasks:
     file: comma_spaces.yml
 
-- name: Correct spaces after hyphen
+- name: "[HYPHEN SPACES] Correct spaces after hyphen"
   include_tasks:
     file: hyphen_spaces.yml
 
-- name: Correct spaces between brackets
+- name: "[BRACKETS SPACES] Correct spaces between brackets"
   include_tasks:
     file: brackets_spaces.yml
 
-- name: Correct fake spaces
+- name: "[FAKE SPACES] Correct fake spaces"
   include_tasks:
     file: fake_spaces.yml
 
-# - name: Divide long lines
+# - name: "[LONG LINES] Divide long lines"
 #   include_tasks:
 #     file: long_lines.yml

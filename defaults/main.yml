@@ -1,8 +1,8 @@
 ---
 # directory path to files that must be correct
 fix_directories: 
-  - /home/zaher/Documents/cis-apache-backup/
-#  - /home/zaher/Bureau/cis-tomcat/
+  - /home/zaher/Documents/cis-apache/
+  - /home/zaher/Bureau/cis-tomcat/
 
 # Files pattern to be correct 
 files_pattern: '*.yml'
