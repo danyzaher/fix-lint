@@ -1,0 +1,39 @@
+---
+
+- name: "[COLON SPACES] Search for too many colon spaces"
+  find:
+    path: "{{ fix_directories }}"
+    patterns: "{{ files_pattern }}"
+    contains: '^.*: {2,}.*$'
+    use_regex: "{{ use_regex }}"
+    recurse: true
+  register: _result 
+  failed_when: _result.matched > 0
+  ignore_errors: true
+
+- name: "[COLON SPACES] Correct colon spaces"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*:) {2,}(.*)$'
+    replace: '\1 \2'
+  loop: "{{ _result.files }}"
+  when: _result.failed
+
+- name: "[COLON SPACES] Correct colon spaces"
+  replace:
+    path: "{{ item.path }}"
+    regexp: '^(.*:) {2,}(.*)$'
+    replace: '\1 \2'
+  loop: "{{ _result.files }}"
+  when: _result.failed
+
+- name: "[COLON SPACES] Search for too many colon spaces"
+  find:
+    path: "{{ fix_directories }}"
+    patterns: "{{ files_pattern }}"
+    contains: '^.*: {2,}.*$'
+    use_regex: "{{ use_regex }}"
+    recurse: true
+  register: _result 
+  failed_when: _result.matched > 0
+  ignore_errors: true

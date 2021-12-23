@@ -2,65 +2,61 @@
 
 - name: "[PRE-TASK] GET FILES THAT MUST BE FIXED"
   find:
-    paths: "{{ fix_directories }}"
-    patterns: "{{ files_pattern }}"
+    paths: "{{ fix_directories }}"
+    patterns: "{{ files_pattern }}"
     recurse: true
-    use_regex: "{{ use_regex }}"
+    use_regex: "{{ use_regex }}"
   register: _fix_files 
 
 #  - name: [MISSING NEWLINE] Correct end of file newline
 #    include_tasks: 
 #     file: EOF_space.yml
 #    vars:
-#      _current_file: "{{ item.path }}"
+#      _current_file: "{{ item.path }}"
 #    loop: "{{ _fix_files.files }}"
-
 - name: "[TRAILING SPACES] Correct trailing spaces"
   include_tasks: 
     file: EOL_space.yml
-
 - name: "[MISSING DASHES] Correct missing ---"
   include_tasks: 
     file: three_dashes.yml
   vars:
-    _current_file: "{{ item.path }}"
+    _current_file: "{{ item.path }}"
   loop: "{{ _fix_files.files }}"
-
 - name: "[COMMENT SPACES] Correct missing comment spaces"
   include_tasks: 
     file: comment_space.yml
-
 - name: "[YES TO TRUE] Replace yes/no for true/false"
   include_tasks: 
     file: yes_to_true.yml
-
 - name: "[BLANK LINES] Erase blank spaces"
   include_tasks:
     file: blank_lines.yml
   vars:
     _current_file: "{{ item.path }}"
   loop: "{{ _fix_files.files }}"
-
-- name: "[COMMA SPACES] Correct spaces before and after commas"
+- name: "[COMMA SPACES] Correct spaces before and after commas"
   include_tasks:
     file: comma_spaces.yml
-
 - name: "[HYPHEN SPACES] Correct spaces after hyphen"
   include_tasks:
     file: hyphen_spaces.yml
-
 - name: "[BRACKETS SPACES] Correct spaces between brackets"
   include_tasks:
     file: brackets_spaces.yml
-
 - name: "[FAKE SPACES] Correct fake spaces"
   include_tasks:
     file: fake_spaces.yml
-
 # - name: "[LONG LINES] Divide long lines"
 #   include_tasks:
 #     file: long_lines.yml
-
 - name: "[SHELL TO COMMAND] Use shell only when necessary"
   include_tasks:
     file: shell_to_command.yml
+- name: "[COLON SPACES] Correct colon spaces"
+  include_tasks:
+    file: colon_spaces.yml
+
+- name: "[FLOW SEQUENCE] Search for apparently bad list"
+  include_tasks:
+    file: flow_sequence.yml

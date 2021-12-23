@@ -3,35 +3,37 @@
 
 - name: "[YES TO TRUE] Search for yes or no"
   find:
-    paths: "{{ fix_directories }}"
+    paths: "{{ fix_directories }}"
     contains: '^ *[a-zA-Z|_|:]+ (True|False|yes|Yes|no|No) *$'
     recurse: true
-    patterns: "{{ files_pattern }}"
+    patterns: "{{ files_pattern }}"
   register: _result
   failed_when: _result.matched > 0
   ignore_errors: true
 
 - name: "[YES TO TRUE] replace yes to true"
   replace:
-    path: "{{ item.path }}"
+    path: "{{ item.path }}"
     regexp: '^( *[a-zA-Z|_|:]+ )(yes|Yes|True)( *)$'
     replace: '\1true\3'
   loop: "{{ _result.files }}"
+  when: _result.failed
 
 - name: "[NO TO FALSE] replace no by false"
   replace:
-    path: "{{ item.path }}"
+    path: "{{ item.path }}"
     regexp: '^( *[a-zA-Z|_|:]+ )(no|No|False)( *)$'
     replace: '\1false\3'
   loop: "{{ _result.files }}"
+  when: _result.failed
 
 - name: "[YES TO TRUE] Search for yes or no"
   find:
-    paths: "{{ fix_directories }}"
+    paths: "{{ fix_directories }}"
     contains: '^ *[a-zA-Z|_|:]+ (True|False|yes|Yes|no|No) *$'
     recurse: true
-    patterns: "{{ files_pattern }}"
-    use_regex: "{{ use_regex }}"
+    patterns: "{{ files_pattern }}"
+    use_regex: "{{ use_regex }}"
   register: _result
   failed_when: _result.matched > 0
   ignore_errors: true

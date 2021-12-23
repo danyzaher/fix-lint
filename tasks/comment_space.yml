@@ -1,35 +1,36 @@
 ---
+
 # Add space between comments mark and sentences if absent
 - name: "[COMMENT SPACES] check for missing comment spaces"
   find:
-    paths: "{{ fix_directories }}"
+    paths: "{{ fix_directories }}"
     contains: '^#{1,3}((?!( |#)).)+.*$'
     recurse: true
-    patterns: "{{ files_pattern }}"
-    use_regex: "{{ use_regex }}"
+    patterns: "{{ files_pattern }}"
+    use_regex: "{{ use_regex }}"
   register: _result
 
 - name: "[COMMENT SPACES] add missing comment spaces"
   replace:
-    path: "{{ item.path }}"
+    path: "{{ item.path }}"
     regexp: '^(#{1,3})(((?!( |#)).)+.*)$'
     replace: '\1 \2'
   loop: "{{ _result.files }}"
 
 - name: "[COMMENT SPACES] add missing comment spaces"
   replace:
-    path: "{{ item.path }}"
+    path: "{{ item.path }}"
     regexp: '^(#{1,3})(((?!( |#)).)+.*)$'
     replace: '\1 \2'
   loop: "{{ _result.files }}"
 
 - name: "[COMMENT SPACES] check for missing comment spaces"
   find:
-    paths: "{{ fix_directories }}"
+    paths: "{{ fix_directories }}"
     contains: '^#{1,3}((?!( |#)).)+.*$'
     recurse: true
-    patterns: "{{ files_pattern }}"
-    use_regex: "{{ use_regex }}"
+    patterns: "{{ files_pattern }}"
+    use_regex: "{{ use_regex }}"
   register: _result
   failed_when: _result.matched > 0
   ignore_errors: true
