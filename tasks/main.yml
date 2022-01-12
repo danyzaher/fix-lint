@@ -8,12 +8,13 @@
     use_regex: "{{ use_regex }}"
   register: _fix_files 
 
-#  - name: [MISSING NEWLINE] Correct end of file newline
-#    include_tasks: 
-#     file: EOF_space.yml
-#    vars:
-#      _current_file: "{{ item.path }}"
-#    loop: "{{ _fix_files.files }}"
+- name: "[MISSING NEWLINE] Correct end of file newline"
+  include_tasks: 
+   file: EOF_space.yml
+  vars:
+    _current_file: "{{ item.path }}"
+  loop: "{{ _fix_files.files }}"
+  
 - name: "[TRAILING SPACES] Correct trailing spaces"
   include_tasks: 
     file: EOL_space.yml
@@ -56,7 +57,10 @@
 - name: "[COLON SPACES] Correct colon spaces"
   include_tasks:
     file: colon_spaces.yml
-
 - name: "[FLOW SEQUENCE] Search for apparently bad list"
   include_tasks:
     file: flow_sequence.yml
+
+- name: "[REDUNDANT QUOTE] check for redundant quote"
+  include_tasks:
+    file: redundant_quote.yml
