@@ -4,7 +4,7 @@
   find:
     paths: "{{ fix_directories }}"
     contains: |
-      ^((?!(when)).)*: (\"|')((?!(\{\{|\}\}|\\|\[|]|#)).)*(\"|')\n?$
+      ^((?!(when|tags)).)*: (\"|')((?!(\{\{|\}\}|\\|\[|]|#)).)*(\"|')\n?$
     patterns: "{{ files_pattern }}"
     recurse: true
     use_regex: "{{ use_regex }}"
@@ -16,7 +16,7 @@
   replace:
     path: "{{ item.path }}"
     regexp: |
-      ^(((?!(when)).)*: )(\"|')(((?!(\{\{|\}\}|\\|\[|]|#)).)*)(\"|')(\n)?$
+      ^(((?!(when|tags|that)).)*: )(\"|')(((?!(\{\{|\}\}|\\|\[|]|#)).)*)(\"|')(\n)?$
     replace: '\1\5\9\n'
   loop: "{{ _result.files }}"
   when: _result.failed
@@ -25,7 +25,7 @@
   find:
     paths: "{{ fix_directories }}"
     contains: |
-      ^((?!(when)).)*: (\"|')((?!(\{\{|\}\}|\\|]|\[|#)).)*(\"|')\n?$
+      ^((?!(when|tags|that)).)*: (\"|')((?!(\{\{|\}\}|\\|]|\[|#)).)*(\"|')\n?$
     patterns: "{{ files_pattern }}"
     recurse: true
     use_regex: "{{ use_regex }}"
@@ -38,7 +38,7 @@
   find:
     paths: "{{ fix_directories }}"
     contains: |
-      ^((?!(when)).)*: '\^((?!(\{\{|\}\}|]|\[|#)).)*\$'\n?$
+      ^((?!(when|tags|that)).)*: '\^((?!(\{\{|\}\}|]|\[|#)).)*\$'\n?$
     patterns: "{{ files_pattern }}"
     recurse: true
     use_regex: "{{ use_regex }}"
@@ -50,7 +50,7 @@
   replace:
     path: "{{ item.path }}"
     regexp: |
-      ^(((?!(when)).)*: )'(\^((?!(\{\{|\}\}|\[|]|#)).)*\$)'(\n)?$
+      ^(((?!(when|tags|that)).)*: )'(\^((?!(\{\{|\}\}|\[|]|#)).)*\$)'(\n)?$
     replace: '\1\4\7\n'
   loop: "{{ _result1.files }}"
   when: _result1.failed
@@ -59,7 +59,7 @@
   find:
     paths: "{{ fix_directories }}"
     contains: |
-      ^((?!(when)).)*: '\^((?!(\{\{|\}\}|]|\[|#)).)*\$'\n?$
+      ^((?!(when|tags|that)).)*: '\^((?!(\{\{|\}\}|]|\[|#)).)*\$'\n?$
     patterns: "{{ files_pattern }}"
     recurse: true
     use_regex: "{{ use_regex }}"

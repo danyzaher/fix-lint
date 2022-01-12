@@ -8,16 +8,19 @@
     use_regex: "{{ use_regex }}"
   register: _fix_files 
 
+- name: "[TRAILING SPACES] Correct trailing spaces"
+  include_tasks: 
+    file: trailing_spaces.yml
+- name: "[TRAILING SPACES] Correct trailing spaces"
+  include_tasks: 
+    file: trailing_spaces.yml
 - name: "[MISSING NEWLINE] Correct end of file newline"
   include_tasks: 
    file: EOF_space.yml
   vars:
     _current_file: "{{ item.path }}"
   loop: "{{ _fix_files.files }}"
-  
-- name: "[TRAILING SPACES] Correct trailing spaces"
-  include_tasks: 
-    file: EOL_space.yml
+
 - name: "[MISSING DASHES] Correct missing ---"
   include_tasks: 
     file: three_dashes.yml

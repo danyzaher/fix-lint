@@ -15,7 +15,7 @@
   replace:
     path: "{{ item.path }}"
     regexp: '^(.{{{ line_max_length | int - 1 }}})(.*)$'
-    replace: '\1\\\n\2'
+    replace: '\1\ \\ \n\2'
   loop: "{{ _result.files }}"
 
 - name: "[LONG LINES] check for lines longer than {{ line_max_length }}"
